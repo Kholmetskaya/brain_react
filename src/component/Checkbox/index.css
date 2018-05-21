@@ -1,0 +1,11 @@
+.custom-checkbox span.active::after{
+    content: "+";
+   
+
+}
+span{
+    display: block;
+}
+.custom-checkbox span::after{
+    content: "-"; 
+}
