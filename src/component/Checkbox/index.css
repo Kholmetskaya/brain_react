@@ -1,11 +1,28 @@
 .custom-checkbox span.active::after{
     content: "+";
-   
+    top: -0px;
 
 }
-span{
-    display: block;
+.custom-checkbox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.custom-checkbox span{
+    display: flex;
+    font-size: 44px;
+    border:1px solid;
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    margin-right: 20px;
 }
 .custom-checkbox span::after{
     content: "-"; 
+    position: absolute;
+    top:-4px;
 }
