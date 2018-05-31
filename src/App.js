@@ -3,6 +3,7 @@ import './App.css';
 // components
 import Checkbox from "./component/Checkbox"
 import Input from "./component/Input"
+import Select from "./component/Select"
 
 class App extends Component {
   constructor(props){
@@ -48,6 +49,7 @@ newMailValue = (val,status) => console.log(val,status)
           <Checkbox label = 'text' change = {val => {
             console.log("current state", val)
           }}/>
+          <Select />
           <button>accept</button>
         </form>
        
