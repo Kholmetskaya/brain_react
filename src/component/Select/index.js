@@ -4,21 +4,22 @@ import "./index.css"
 class Select  extends Component {
     constructor(props){
         super(props)
-        this.state = {value: 'B'};
-        this.handleChange = this.handleChange.bind(this);
+        this.state = { value: 'B' };
+        // this.handleChange = this.handleChange.bind(this);
     }
-  handleChange(event) {
+
+  handleChange = (event) => {
     this.setState({value: event.target.value});
   }
 
 
-    render(){     
+    render(){    
+        const  { option } = this.props;
+
         return (
             <div>
             <select className = 'select' value={this.state.value} onChange={this.handleChange}>
-              <option value="A">1</option>
-              <option value="B">2</option>
-              <option value="C">3</option>
+              {Object.keys(option).map((e, i) => <option key={i} value={option[e].value}>{option[e].label}</option>)}
             </select>
           </div>
         );

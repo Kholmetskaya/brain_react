@@ -1,64 +1,51 @@
 import React, { Component } from 'react';
 import './App.css';
 // components
+
+import { connect } from 'react-redux';
+
 import Checkbox from "./component/Checkbox"
 import Input from "./component/Input"
 import Select from "./component/Select"
 
+
 class App extends Component {
   constructor(props){
     super(props);
-
     this.id = setInterval(()=> {
-      this.setState({
-        currentDate: getDate()
-      });
-    },1000);
-    this.state = {
-      currentDate: getDate()
-    }
+      
+    }, 1000);
   }
- sendForm(e){
-    e.preventDefault();
-    console.log(this);
-    this.setState({
-      currentDate: getDate()
-    })
- }
 
-componentWillUnmount(){
-  alert("test")
-  clearInterval(this.id);
-}
-
-newMailValue = (val,status) => console.log(val,status)
   render() {
-    const options = {
-      errorMessage : "This email is not valid",
-      regExp: /.{5,12}@.{3,10}\..{2,3}/,
-      endWrite: this.newMailValue
-    }
-
-      return <div className="App">
-      <form onSubmit={this.sendForm.bind(this)}>
-          <div>{this.state.currentDate}</div>
-          <span>Sign in</span>
-          <Input {...options} />
-          <input className = "" type = "password" placeholder = "password"/>
-          <input className = "" type = "password" placeholder = "confirm password"/>
-          <Checkbox label = 'text' change = {val => {
-            console.log("current state", val)
-          }}/>
-          <Select />
-          <button>accept</button>
-        </form>
-       
-      </div>;
- 
+    console.log(this.props)
+    const { time } = this.props;
+    return <div className="App" onClick={()=> this.props.dispatch({
+      type: "NEW_TIME", 
+      newTime: new Date().toISOString()
+    })}>
+      <form onSubmit={e => e.preventDefault()} >
+        <span>{time}</span>
+        <Select option={{
+          1: {value: 1, label:"A"}, 
+          2: {value: 2,  label:"B"}, 
+          3 : {value: 3,  label: "C"}
+          }} />
+      </form>
+    </div>;
   }
 }
 
-export default App;
+
+const mapStateToProps = state => {
+  const newName = state.test.name + "";
+  return {
+    time: state.time.currentTime,
+    _key: newName
+  }
+};
+
+export default connect(mapStateToProps)(App);
 
 function getDate(){
   let date = new Date().toISOString();
